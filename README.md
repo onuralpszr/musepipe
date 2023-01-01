@@ -1,11 +1,14 @@
-<h1 style="text-align: center;">Musepipe</h1>
+<p align="center">
+  <img style="width:40%;" src="logo/musepipelogo.png" />
+</p>
 
-Musepipe is mediapipe based on library.
+<h1 align="center">MusePipe</h1>
 
+<h3 align="center">Musepipe is mediapipe based on library.</h3>
+<br>
 
 ![GitHub](https://img.shields.io/github/license/onuralpszr/musepipe?color=green)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/umitkacar/Ear-segmentation-ai/main.svg)](https://results.pre-commit.ci/latest/github/umitkacar/Ear-segmentation-ai/main)
-
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/onuralpszr/musepipe/main.svg)](https://results.pre-commit.ci/latest/github/onuralpszr/musepipe/main)
 
 <p>
   <img alt="Python38" src="https://img.shields.io/badge/Python-3.8-3776AB.svg?logo=Python&logoColor=white"/>
