@@ -1,6 +1,8 @@
+from time import sleep
+
 import typer
 
-from musepipe.hand import MpHand
+from musepipe.hand.camera import MpHandCamera
 
 from . import __version__
 
@@ -13,20 +15,20 @@ def version():
 
 
 @app.command()
-def webcamhand(
-    min_detection_confidence: float = 0.5,
-    min_tracking_confidence: float = 0.5,
-    max_num_hands: int = 2,
-    static_image_mode: bool = False,
+def mpcamerahand(
+    max_num_hands: int = 2, timeout: int = 100, video_src: int = 1
 ):
-    mphand = MpHand(
-        static_image_mode=static_image_mode,
+    mphand = MpHandCamera(
+        video_src=video_src,
         max_num_hands=max_num_hands,
         model_complexity=1,
-        min_detection_confidence=min_detection_confidence,
-        min_tracking_confidence=min_tracking_confidence,
+        min_detection_confidence=0.5,
+        min_tracking_confidence=0.5,
     )
-    mphand.camera_mode(1, 1)
+
+    mphand.start()
+    sleep(timeout)
+    mphand.stop()
 
 
 if __name__ == "__main__":
