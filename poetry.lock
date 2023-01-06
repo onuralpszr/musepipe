@@ -571,7 +571,7 @@ gitdb = ">=4.0.1,<5"
 
 [[package]]
 name = "gradio"
-version = "3.15.0"
+version = "3.16.0"
 description = "Python library for easily interacting with trained machine learning models"
 category = "main"
 optional = false
@@ -598,6 +598,7 @@ pydub = "*"
 python-multipart = "*"
 pyyaml = "*"
 requests = "*"
+typing-extensions = "*"
 uvicorn = "*"
 websockets = ">=10.0"
 
@@ -2908,8 +2909,8 @@ gitpython = [
     {file = "GitPython-3.1.30.tar.gz", hash = "sha256:769c2d83e13f5d938b7688479da374c4e3d49f71549aaf462b646db9602ea6f8"},
 ]
 gradio = [
-    {file = "gradio-3.15.0-py3-none-any.whl", hash = "sha256:0ac9d28b75baa5263e4225066670491c29e7644f3038b426b7da090760ff79ff"},
-    {file = "gradio-3.15.0.tar.gz", hash = "sha256:eec606a00b6f5fdbde5a62323dceb50159a340204bcb8e824d28342f8382a7c7"},
+    {file = "gradio-3.16.0-py3-none-any.whl", hash = "sha256:a97a7d1dbabf04fe6c7ec8b6007a47269c0add53d1e65f7368d80a58d68f8aaa"},
+    {file = "gradio-3.16.0.tar.gz", hash = "sha256:a9d615059719e4077f7c23d72e574b0f938d743fc9bc20c19f7525604adddf80"},
 ]
 gunicorn = [
     {file = "gunicorn-20.1.0-py3-none-any.whl", hash = "sha256:9dcc4547dbb1cb284accfb15ab5667a0e5d1881cc443e0677b4882a4067a807e"},
