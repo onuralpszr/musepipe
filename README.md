@@ -51,3 +51,6 @@ poetry install
 ```bash
 pre-commit install -f --config .pre-commit-config.yaml
 ```
+
+### Feature list
+TBH
