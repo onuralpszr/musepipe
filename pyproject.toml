@@ -53,6 +53,7 @@ pyupgrade = "^3.3.1"
 types-requests = "^2.28.11.7"
 ruff = "^0.0.203"
 pytest = "^7.2.0"
+toml = "^0.10.2"
 
 
 [tool.pytest.ini_options]
@@ -62,6 +63,11 @@ flake8-max-line-length = 79
 [tool.isort]
 line_length = 79
 profile = "black"
+
+[tool.bandit]
+target = ["tests", "musepipe"]
+tests = ["B201", "B301"]
+
 
 [tool.black]
 line-length = 79
