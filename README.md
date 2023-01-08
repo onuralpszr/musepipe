@@ -9,6 +9,8 @@
 
 ![GitHub](https://img.shields.io/github/license/onuralpszr/musepipe?color=green)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/onuralpszr/musepipe/main.svg)](https://results.pre-commit.ci/latest/github/onuralpszr/musepipe/main)
+[![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
+
 
 <p>
   <img alt="Python38" src="https://img.shields.io/badge/Python-3.8-3776AB.svg?logo=Python&logoColor=white"/>
