@@ -20,6 +20,7 @@ def mpcamerahand(
     max_num_hands: int = 2, timeout: int = 100, video_src: int = 1
 ):
     mphand = MpHandCamera(
+        preview=True,
         video_src=video_src,
         max_num_hands=max_num_hands,
         model_complexity=1,

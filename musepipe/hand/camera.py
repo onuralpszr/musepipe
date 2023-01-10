@@ -1,16 +1,21 @@
 import threading
-from types import NoneType
 
-from cv2 import COLOR_BGR2RGB, COLOR_RGB2BGR
+from cv2 import (
+    CAP_PROP_FRAME_HEIGHT,
+    CAP_PROP_FRAME_WIDTH,
+    COLOR_BGR2RGB,
+    COLOR_RGB2BGR,
+)
 from cv2 import Mat as cv_Mat
-from cv2 import VideoCapture as cv_VideoCapture
-from cv2 import cvtColor
+from cv2 import VideoCapture, cvtColor
 from cv2 import flip as cv_flip
 from cv2 import imshow as cv_imshow
 from cv2 import waitKey as cv_waitKey
 from mediapipe.python.solutions import drawing_styles as mp_drawing_styles
 from mediapipe.python.solutions import drawing_utils as mp_drawing
 from mediapipe.python.solutions import hands as mp_hands
+from numpy import uint8
+from numpy import zeros as np_zeros
 
 
 class MpHandCamera:
@@ -21,6 +26,7 @@ class MpHandCamera:
         model_complexity: int,
         min_detection_confidence: float,
         min_tracking_confidence: float,
+        preview: bool = False,
     ) -> None:
         self.hands = mp_hands.Hands(
             static_image_mode=False,
@@ -32,7 +38,15 @@ class MpHandCamera:
         self.cap_status = False
         self.results_detect = False
         self.cap_lock = threading.Lock()
-        self.cap: cv_VideoCapture = cv_VideoCapture(video_src)
+        self.cap: VideoCapture = VideoCapture(video_src)
+        self.frame: cv_Mat
+        self.preview: bool = preview
+
+        width = self.cap.get(CAP_PROP_FRAME_WIDTH)  # camera float `width`
+        height = self.cap.get(CAP_PROP_FRAME_HEIGHT)  # camera float `height`
+        self.last_frame: cv_Mat = np_zeros(
+            (int(height), int(width), 3), dtype=uint8
+        )
 
     def __drawing(self, results, image: cv_Mat) -> cv_Mat:
         for hand_landmarks in results.multi_hand_landmarks:
@@ -54,11 +68,17 @@ class MpHandCamera:
         self.thread.start()
         return self
 
-    def get_frame(self) -> tuple[bool, cv_Mat]:
+    def get_frame(self) -> tuple[bool, cv_Mat | None]:
+
+        success: bool = False
         with self.cap_lock:
-            frame: cv_Mat = self.frame.copy()
-            success: bool = self.success
-        return success, frame
+            print(self.results_detect)
+            while self.results_detect is False:
+                print(self.results_detect)
+                self.last_frame = self.frame.copy()
+                success = self.success
+
+        return success, self.last_frame
 
     def get_multi_handedness(self):
         with self.cap_lock:
@@ -66,7 +86,11 @@ class MpHandCamera:
                 multi_handedness = self.multi_handedness
                 return multi_handedness
             else:
-                return NoneType
+                return None
+
+    def __show_preview(self, frame: cv_Mat):
+        cv_imshow("MediaPipe Hands", cv_flip(frame, 1))
+        cv_waitKey(1)
 
     def get_multi_hand_world_landmarks(self):
         with self.cap_lock:
@@ -74,7 +98,7 @@ class MpHandCamera:
                 multi_hand_world_landmarks = self.multi_hand_world_landmarks
                 return multi_hand_world_landmarks
             else:
-                return NoneType
+                return None
 
     def stop(self):
         self.cap_status = False
@@ -82,6 +106,7 @@ class MpHandCamera:
 
     def update_frame(self):
         # For webcam input:
+        self.results_detect = False
         while self.cap.isOpened() & self.cap_status:
             success, frame = self.cap.read()
             with self.cap_lock:
@@ -111,9 +136,8 @@ class MpHandCamera:
                 )
                 self.results_detect = True
 
-            # Flip the image horizontally for a selfie-view display.
-            cv_imshow("MediaPipe Hands", cv_flip(frame, 1))
-            cv_waitKey(1)
+            if self.preview:
+                self.__show_preview(frame)
 
     def __exit__(self, exec_type, exc_value, traceback):
         self.cap.release()
