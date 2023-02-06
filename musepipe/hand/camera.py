@@ -69,7 +69,6 @@ class MpHandCamera:
         return self
 
     def get_frame(self) -> tuple[bool, cv_Mat | None]:
-
         success: bool = False
         with self.cap_lock:
             print(self.results_detect)
