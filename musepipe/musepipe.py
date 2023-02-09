@@ -1,6 +1,7 @@
 from time import sleep
 
 import typer
+from mediapipe import __version__ as mp_ver
 
 from musepipe.hand.camera import MpHandCamera
 from musepipe.hand.image import MpHandImage
@@ -12,7 +13,7 @@ app = typer.Typer()
 
 @app.command()
 def version():
-    print(f"MusePipe Version {__version__}")
+    print(f"MusePipe Version: {__version__} - Mediapipe Version: {mp_ver}")
 
 
 @app.command()
