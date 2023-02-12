@@ -40,7 +40,6 @@ def mpimagehand(
     output_path: str = "",
     max_num_hands: int = 2,
 ):
-
     mphand_image = MpHandImage(
         input_path=input_path,
         annotated_image_output_path=output_path.strip(""),
