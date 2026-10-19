@@ -1,9 +1,8 @@
 import os
 from pathlib import Path
 
-from cv2 import COLOR_BGR2RGB
+from cv2 import COLOR_BGR2RGB, cvtColor
 from cv2 import Mat as cv_Mat
-from cv2 import cvtColor
 from cv2 import flip as cv_flip
 from cv2 import imread as cv_imread
 from cv2 import imwrite as cv_imwrite
