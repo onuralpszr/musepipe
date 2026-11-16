@@ -5,12 +5,10 @@ from cv2 import (
     CAP_PROP_FRAME_WIDTH,
     COLOR_BGR2RGB,
     COLOR_RGB2BGR,
-)
-from cv2 import Mat as cv_Mat
-from cv2 import (
     VideoCapture,
     cvtColor,
 )
+from cv2 import Mat as cv_Mat
 from cv2 import flip as cv_flip
 from cv2 import imshow as cv_imshow
 from cv2 import waitKey as cv_waitKey
